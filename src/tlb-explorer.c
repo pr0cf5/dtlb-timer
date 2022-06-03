@@ -32,14 +32,14 @@ struct log_entry {
 
 static void *g_pages;
 static void *g_hpage;
-static size_t recursion_maxdepth = 5;
+static size_t recursion_maxdepth = 3;
 
 static int pages_init() {
     if ((g_pages = (void *)mmap(NULL, PGCNT * PGSIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON, -1 ,0)) == MAP_FAILED) {
         perror("mmap");
         return -1;
     }
-    if ((g_hpage = (void *)mmap(NULL, HPGSIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON, -1, 0)) == MAP_FAILED) {
+    if ((g_hpage = (void *)mmap(NULL, HPGSIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON|MAP_HUGETLB, -1, 0)) == MAP_FAILED) {
         perror("mmap");
         return -1;
     }
@@ -165,7 +165,7 @@ int explore_rec(uint8_t *idx_current_seq, char **ptr_current_seq, size_t current
 // run the algorith that explores the DFA states of the L1 dTLB
 int explore() {
     // baseline sequence: {0,1,2,3,4}
-    // access elements 0~1 afterwards
+    // access elements 0~3 afterwards
     static uint8_t idx_seq[0x1000];
     uint8_t initial_seq[] = {0,1,2,3,4};
     size_t i, j;
@@ -174,7 +174,7 @@ int explore() {
 
     memcpy(idx_seq, initial_seq, sizeof(initial_seq));
     ptr_seq = (char **)g_hpage;
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < sizeof(initial_seq)/sizeof(initial_seq[0]); i++) {
         j = idx_seq[i];
         ptr_seq[i] = (char *)g_pages + (j * PGSIZE * TLB_SETS) + (j * CACHE_LINESIZE % PGSIZE);
     }
@@ -197,11 +197,8 @@ int main(int argc, char **argv) {
     if (pfc_init() < 0) {
         exit(-1);
     }
-    
     if (explore() < 0) {
         exit(-1);
     }
-    
-    //test_seq_example();
     return 0;
 }

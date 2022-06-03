@@ -90,7 +90,7 @@ static uint64_t measure_tlb_miss(char **ptrs) {
     trash &= a3[trash];
     _mm_lfence();
     ctr = rdpmc_begin();
-    trash &= a4[trash];
+    trash &= a1[trash];
     ctr = rdpmc_end() - ctr;
     return ctr | trash;
 }

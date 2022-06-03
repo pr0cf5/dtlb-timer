@@ -2,7 +2,7 @@ CC=gcc
 CXX=g++
 INCLUDEFLAGS=-I libpfc/include
 
-all: tlb-explorer
+all: tlb-explorer tlb-evset
 
 tlb-explorer: tlb-explorer.c libpfc/libpfc.o
 	$(CC) $(CFLAGS) $(INCLUDEFLAGS) -o $@ $^
