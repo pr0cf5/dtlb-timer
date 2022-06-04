@@ -43,7 +43,7 @@ static uint32_t run_with_x(char **pages) {
     trash = pages[1][trash];
     trash = pages[0][trash];
     trash = pages[2][trash];
-    for (i = 0; i < 10000; i++) {
+    for (i = 0; i < 1000; i++) {
         trash = pages[0][trash];
         trash = pages[3][trash];
         trash = pages[0][trash];
@@ -77,7 +77,7 @@ static uint32_t run_without_x(char **pages) {
     trash = pages[1][trash];
     trash = pages[0][trash];
     trash = pages[2][trash];
-    for (i = 0; i < 10000; i++) {
+    for (i = 0; i < 1000; i++) {
         trash = pages[0][trash];
         trash = pages[3][trash];
         trash = pages[0][trash];
@@ -118,7 +118,7 @@ int main(int argc, char **argv) {
         perror("gettimeofday");
         exit(-1);
     }
-    printf("with X: %ld.%lds\n", tv2.tv_sec-tv1.tv_sec, tv2.tv_usec-tv1.tv_usec);
+    printf("with X: %lds %ldms\n", tv2.tv_sec-tv1.tv_sec, tv2.tv_usec-tv1.tv_usec);
     
     if (gettimeofday(&tv1, NULL) < 0) {
         perror("gettimeofday");
@@ -129,6 +129,6 @@ int main(int argc, char **argv) {
         perror("gettimeofday");
         exit(-1);
     }
-    printf("without X: %ld.%lds\n", tv2.tv_sec-tv1.tv_sec, tv2.tv_usec-tv1.tv_usec);
+    printf("without X: %lds %ldms\n", tv2.tv_sec-tv1.tv_sec, tv2.tv_usec-tv1.tv_usec);
     return 0;
 }
