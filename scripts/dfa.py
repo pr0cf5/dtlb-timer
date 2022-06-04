@@ -18,7 +18,7 @@ def read_result(fname):
     return out
 
 def save_vgraph(vgraph, file_name):
-    vgraph.format = 'png'
+    vgraph.format = 'svg'
     vgraph.filename = file_name
     vgraph.directory = 'graphs'
     vgraph.render(view=False)
@@ -36,7 +36,7 @@ def seqs_to_graph(seqs):
     
 def graph_to_vgraph(nodes, edges):
     digraph = graphviz.Digraph()
-    color_table = {1 : "red", 2 : "black", 3: "grey"}
+    color_table = {1 : "red", 2 : "black", 255: "grey"}
     for node in nodes:
         digraph.node(node)
     for (src,dst,elem,color) in edges:
