@@ -11,7 +11,7 @@ tlb-explorer: tlb-explorer.c libpfc/libpfc.o
 tlb-evset: tlb-evset.c libpfc/libpfc.o
 	$(CC) $(CFLAGS) $(INCLUDEFLAGS) -o $@ $^
 
-poc: poc.c libpfc/libpfc.o
+poc: poc.c
 	$(CC) $(CFLAGS) $(INCLUDEFLAGS) -o $@ $^
 
 clean:

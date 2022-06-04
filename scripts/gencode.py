@@ -4,7 +4,8 @@ import sys,os
 if __name__ == "__main__":
     init_without_x = [5, 6, 7, 8, 0, 1, 2, 3]
     init_with_x = [5, 6, 7, 8, 0, 1, 2, 3, 4]
-    seq = [3, 1, 0, 2, 0, 3, 0, 1, 0, 2, 0, 3, 0, 1, 0, 2, 0, 3, 0, 1, 0, 2, 0, 3, 0, 1, 0, 2, 0, 3, 0, 1, 0, 2, 0, 3, 0, 1, 0, 2, 0, 3, 0, 1]
+    #3, 1, 0, 2
+    seq = [0, 3, 0, 1, 0, 2, 0, 3, 0, 1, 0, 2]
     template_without_x = """
 static uint32_t run_without_x(char **pages) {
     register uint32_t trash;
