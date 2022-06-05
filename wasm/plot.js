@@ -8,7 +8,7 @@ function plot(data1, data2) {
     // X axis: scale and draw:
     let xm = Math.max(Math.max(...data1), Math.max(...data2));
     var x = d3.scaleLinear()
-        .domain([0, 4.0]) 
+        .domain([0, xm*2]) 
         .range([0, width]);
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
