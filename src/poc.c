@@ -113,22 +113,22 @@ int main(int argc, char **argv) {
         perror("gettimeofday");
         exit(-1);
     }
-    run_with_x(pages);    
+    run_without_x(pages);    
     if (gettimeofday(&tv2, NULL) < 0) {
         perror("gettimeofday");
         exit(-1);
     }
-    printf("with X: %lds %ldms\n", tv2.tv_sec-tv1.tv_sec, tv2.tv_usec-tv1.tv_usec);
+    printf("without X: %lds %ldus\n", tv2.tv_sec-tv1.tv_sec, tv2.tv_usec-tv1.tv_usec);
     
     if (gettimeofday(&tv1, NULL) < 0) {
         perror("gettimeofday");
         exit(-1);
     }
-    run_without_x(pages);
+    run_with_x(pages);
     if (gettimeofday(&tv2, NULL) < 0) {
         perror("gettimeofday");
         exit(-1);
     }
-    printf("without X: %lds %ldms\n", tv2.tv_sec-tv1.tv_sec, tv2.tv_usec-tv1.tv_usec);
+    printf("with X: %lds %ldus\n", tv2.tv_sec-tv1.tv_sec, tv2.tv_usec-tv1.tv_usec);
     return 0;
 }
